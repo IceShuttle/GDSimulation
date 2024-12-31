@@ -1,0 +1,78 @@
+[gd_scene load_steps=17 format=3 uid="uid://dyhd7wtoixwn5"]
+
+[ext_resource type="Texture2D" uid="uid://d2oka2q5gpfbo" path="res://floor/Tiles132A_1K-PNG/Tiles132A_1K-PNG_Color.png" id="3_bngsk"]
+[ext_resource type="Script" path="res://test.gd" id="3_tkh4c"]
+[ext_resource type="Texture2D" uid="uid://digd5dql627r0" path="res://floor/Tiles132A_1K-PNG/Tiles132A_1K-PNG_AmbientOcclusion.png" id="4_bpbyj"]
+[ext_resource type="Texture2D" uid="uid://cetdpyvcr4q42" path="res://floor/Tiles132A_1K-PNG/Tiles132A_1K-PNG_Displacement.png" id="5_4cbaq"]
+[ext_resource type="Shader" path="res://display.gdshader" id="5_hhyp2"]
+[ext_resource type="Texture2D" uid="uid://g6xvcp3gnaku" path="res://floor/Tiles132A_1K-PNG/Tiles132A_1K-PNG_NormalGL.png" id="6_u8h1k"]
+[ext_resource type="Texture2D" uid="uid://cwpinfbl6uvgq" path="res://floor/Tiles132A_1K-PNG/Tiles132A_1K-PNG_Roughness.png" id="7_0tyc2"]
+
+[sub_resource type="Texture2DRD" id="Texture2DRD_4jpp3"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2gbpo"]
+shader = ExtResource("5_hhyp2")
+shader_parameter/pos_data = SubResource("Texture2DRD_4jpp3")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hvt0r"]
+albedo_color = Color(0.996651, 0, 0.0387574, 1)
+roughness = 0.38
+
+[sub_resource type="SphereMesh" id="SphereMesh_5bu30"]
+material = SubResource("StandardMaterial3D_hvt0r")
+radius = 0.05
+height = 0.1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ayd5w"]
+albedo_texture = ExtResource("3_bngsk")
+roughness_texture = ExtResource("7_0tyc2")
+normal_enabled = true
+normal_texture = ExtResource("6_u8h1k")
+ao_enabled = true
+ao_texture = ExtResource("4_bpbyj")
+heightmap_enabled = true
+heightmap_scale = 2.902
+heightmap_deep_parallax = true
+heightmap_min_layers = 8
+heightmap_max_layers = 32
+heightmap_texture = ExtResource("5_4cbaq")
+uv1_scale = Vector3(0.2, 0.2, 0.2)
+uv1_triplanar = true
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_kbtbi"]
+size = Vector2(20, 20)
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_pg5h2"]
+
+[sub_resource type="Sky" id="Sky_wp7aw"]
+sky_material = SubResource("ProceduralSkyMaterial_pg5h2")
+
+[sub_resource type="Environment" id="Environment_5g6ty"]
+background_mode = 2
+sky = SubResource("Sky_wp7aw")
+tonemap_mode = 2
+
+[node name="Node" type="Node"]
+
+[node name="Node3D" type="Node3D" parent="."]
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0694971, 1.84751, 0.54466)
+amount = 1024
+process_material = SubResource("ShaderMaterial_2gbpo")
+draw_pass_1 = SubResource("SphereMesh_5bu30")
+script = ExtResource("3_tkh4c")
+
+[node name="Camera3D" type="Camera3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 0.872632, 0.488378, 0, -0.488378, 0.872632, 0.179713, 2.42289, 3.93183)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Node3D"]
+transform = Transform3D(0.455328, 0.632131, -0.626967, -1.83469e-08, 0.704201, 0.710001, 0.890324, -0.323283, 0.320642, -0.0694971, 3.00164, 5.70506)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.705626, 0)
+material_override = SubResource("StandardMaterial3D_ayd5w")
+mesh = SubResource("PlaneMesh_kbtbi")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Node3D"]
+environment = SubResource("Environment_5g6ty")

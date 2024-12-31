@@ -1,0 +1,14 @@
+[remap]
+
+importer="glsl"
+type="RDShaderFile"
+uid="uid://57dg5fy7nx1a"
+path="res://.godot/imported/gravity.glsl-3de9e276c0c5d12f054d4c818ad9db03.res"
+
+[deps]
+
+source_file="res://compute/gravity.glsl"
+dest_files=["res://.godot/imported/gravity.glsl-3de9e276c0c5d12f054d4c818ad9db03.res"]
+
+[params]
+
