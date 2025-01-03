@@ -22,13 +22,13 @@ vec3 calc_pressure_force(uint i) {
         float density = densities.data[i];
         if (density < 10)
             continue;
-        force += dir * density_to_pressure(density) * slope * info.mass / density;
+        force += -dir * density_to_pressure(density) * slope * info.mass / density;
     }
     return force;
 }
 
 void apply_pressure_force(float delta) {
-    vel.data[gl_GlobalInvocationID.x] += -(calc_pressure_force(gl_GlobalInvocationID.x) * delta) / 500;
+    vel.data[gl_GlobalInvocationID.x] += (calc_pressure_force(gl_GlobalInvocationID.x) * delta) / 500;
 }
 
 void apply_gravity(float delta) {
@@ -38,12 +38,25 @@ void apply_gravity(float delta) {
 void check_boundaries(float elasticity) {
     if (abs(0.5 - pos.data[gl_GlobalInvocationID.x].x) > .5) {
         vel.data[gl_GlobalInvocationID.x].x = -1 * vel.data[gl_GlobalInvocationID.x].x * elasticity;
+        if (pos.data[gl_GlobalInvocationID.x].x < 0)
+            pos.data[gl_GlobalInvocationID.x].x = 0;
+
+        if (pos.data[gl_GlobalInvocationID.x].x > 1)
+            pos.data[gl_GlobalInvocationID.x].x = 1;
     }
     if (abs(0.5 - pos.data[gl_GlobalInvocationID.x].y) > .5) {
         vel.data[gl_GlobalInvocationID.x].y = -1 * vel.data[gl_GlobalInvocationID.x].y * elasticity;
+        if (pos.data[gl_GlobalInvocationID.x].y < 0)
+            pos.data[gl_GlobalInvocationID.x].y = 0;
+        if (pos.data[gl_GlobalInvocationID.x].y > 1)
+            pos.data[gl_GlobalInvocationID.x].y = 1;
     }
     if (abs(0.5 - pos.data[gl_GlobalInvocationID.x].z) > .5) {
         vel.data[gl_GlobalInvocationID.x].z = -1 * vel.data[gl_GlobalInvocationID.x].z * elasticity;
+        if (pos.data[gl_GlobalInvocationID.x].z < 0)
+            pos.data[gl_GlobalInvocationID.x].z = 0;
+        if (pos.data[gl_GlobalInvocationID.x].z > 1)
+            pos.data[gl_GlobalInvocationID.x].z = 1;
     }
 }
 

@@ -119,9 +119,12 @@ func _compute(delta:float) ->void:
 	var out:=rd.buffer_get_data(density_buffer)
 	var opt :=out.to_float32_array()
 	var sum:=0.
+	var count:=0
 	for i in opt:
+		if(i<100):
+			count+=1
 		sum+=i
-	print(sum/opt.size())
+	print(sum/opt.size(),"###########",count)
 	#rd.submit()
 	
 func calculate_gravity(delta:float)->void:

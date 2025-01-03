@@ -58,10 +58,11 @@ tonemap_mode = 2
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13584, 0.327994, -3.23491)
-amount = 2048
+amount = 1024
 process_material = SubResource("ShaderMaterial_2gbpo")
 draw_pass_1 = SubResource("SphereMesh_5bu30")
 script = ExtResource("3_tkh4c")
+target_density = 250.0
 
 [node name="Camera3D" type="Camera3D" parent="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 0.872632, 0.488378, 0, -0.488378, 0.872632, 0.179713, 2.42289, 3.93183)
