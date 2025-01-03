@@ -57,8 +57,8 @@ tonemap_mode = 2
 [node name="Node3D" type="Node3D" parent="."]
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0694971, 1.84751, 0.54466)
-amount = 1024
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13584, 0.327994, -3.23491)
+amount = 2048
 process_material = SubResource("ShaderMaterial_2gbpo")
 draw_pass_1 = SubResource("SphereMesh_5bu30")
 script = ExtResource("3_tkh4c")
@@ -70,7 +70,7 @@ transform = Transform3D(1, 0, 0, 0, 0.872632, 0.488378, 0, -0.488378, 0.872632, 
 transform = Transform3D(0.455328, 0.632131, -0.626967, -1.83469e-08, 0.704201, 0.710001, 0.890324, -0.323283, 0.320642, -0.0694971, 3.00164, 5.70506)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.705626, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.499237, 0)
 material_override = SubResource("StandardMaterial3D_ayd5w")
 mesh = SubResource("PlaneMesh_kbtbi")
 
