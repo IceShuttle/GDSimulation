@@ -1,10 +1,14 @@
 layout(set = 0, binding = 0, std430) restrict buffer readonly Info {
-    int num;
+    float waste;
     float mass;
+    float xbound;
+    float ybound;
+    float zbound;
     float elasticity;
     float gravity;
     float target_density;
     float pressure_multiplier;
+    float viscosity;
     float delta;
 } info;
 

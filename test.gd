@@ -1,10 +1,12 @@
 extends GPUParticles3D
 
 @export var mass:=1.0
+@export var bounds:= Vector3.ONE
 @export var elasticity:=.9
 @export var gravity:=9.8
-@export var target_density:= 200.
+@export var target_density:= 120.
 @export var pressure_multiplier:=1
+@export var viscosity:=0
 
 
 var rd:RenderingDevice
@@ -27,7 +29,7 @@ func _ready() -> void:
 	RenderingServer.call_on_render_thread(_setup_compute)
 	
 func _generate_params(delta:float)->PackedByteArray:
-	return PackedFloat32Array([1024,mass,elasticity,gravity,target_density,pressure_multiplier,delta]).to_byte_array()
+	return PackedFloat32Array([0,mass,bounds.x,bounds.y,bounds.z,elasticity,gravity,target_density,pressure_multiplier,viscosity,delta]).to_byte_array()
 	
 func _setup_compute()->void:
 	rd = RenderingServer.get_rendering_device()
@@ -106,7 +108,7 @@ func num_float_arr(n:int,val:float)->Array[float]:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if Input.is_action_pressed("ui_accept"):
-		activated = true
+		activated = not activated
 	if activated:
 		RenderingServer.call_on_render_thread(_compute.bind(delta))
 
@@ -114,6 +116,7 @@ func _process(delta: float) -> void:
 func _compute(delta:float) ->void:
 	calculate_gravity(delta)
 	compute_shader_pipeline(density_pipeline,density_uniform_set)
+	self.process_material.set_shader_parameter("offset",bounds)
 	
 	
 	var out:=rd.buffer_get_data(density_buffer)

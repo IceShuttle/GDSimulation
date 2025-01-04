@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://dyhd7wtoixwn5"]
+[gd_scene load_steps=16 format=3 uid="uid://dyhd7wtoixwn5"]
 
 [ext_resource type="Texture2D" uid="uid://d2oka2q5gpfbo" path="res://floor/Tiles132A_1K-PNG/Tiles132A_1K-PNG_Color.png" id="3_bngsk"]
 [ext_resource type="Script" path="res://test.gd" id="3_tkh4c"]
@@ -12,14 +12,10 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2gbpo"]
 shader = ExtResource("5_hhyp2")
+shader_parameter/offset = Vector3(2.035, 2, 4.6)
 shader_parameter/pos_data = SubResource("Texture2DRD_4jpp3")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hvt0r"]
-albedo_color = Color(0.996651, 0, 0.0387574, 1)
-roughness = 0.38
-
 [sub_resource type="SphereMesh" id="SphereMesh_5bu30"]
-material = SubResource("StandardMaterial3D_hvt0r")
 radius = 0.05
 height = 0.1
 
@@ -36,8 +32,7 @@ heightmap_deep_parallax = true
 heightmap_min_layers = 8
 heightmap_max_layers = 32
 heightmap_texture = ExtResource("5_4cbaq")
-uv1_scale = Vector3(0.2, 0.2, 0.2)
-uv1_triplanar = true
+uv1_scale = Vector3(4, 4, 4)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_kbtbi"]
 size = Vector2(20, 20)
@@ -57,12 +52,14 @@ tonemap_mode = 2
 [node name="Node3D" type="Node3D" parent="."]
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13584, 0.327994, -3.23491)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.10474, 2.41158, -3.23491)
 amount = 1024
 process_material = SubResource("ShaderMaterial_2gbpo")
 draw_pass_1 = SubResource("SphereMesh_5bu30")
 script = ExtResource("3_tkh4c")
-target_density = 250.0
+bounds = Vector3(4, 3, 4)
+elasticity = 0.7
+pressure_multiplier = 150
 
 [node name="Camera3D" type="Camera3D" parent="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 0.872632, 0.488378, 0, -0.488378, 0.872632, 0.179713, 2.42289, 3.93183)
