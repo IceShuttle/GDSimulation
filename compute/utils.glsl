@@ -30,7 +30,7 @@ densities;
 layout(rgba16f, binding = 4) uniform image2D output_img;
 float compute_distance(vec3 p1, vec3 p2) {
     vec3 diff = p2 - p1;
-    return sqrt(dot(diff, diff));
+    return length(diff);
 }
 
 float smoothing_func(float r) {
@@ -47,4 +47,8 @@ float derivative(float r) {
     } else {
         return 0;
     }
+}
+
+float second_derivative(float r) {
+    return -3 / 2;
 }

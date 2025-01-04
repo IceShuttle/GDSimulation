@@ -1,12 +1,12 @@
 extends GPUParticles3D
 
-@export var mass:=1.0
+@export var mass:float=1.0
 @export var bounds:= Vector3.ONE
-@export var elasticity:=.9
-@export var gravity:=9.8
-@export var target_density:= 120.
-@export var pressure_multiplier:=1
-@export var viscosity:=0
+@export var elasticity:float=.9
+@export var gravity:float=9.8
+@export var target_density:float= 120.
+@export var pressure_multiplier:float=1.
+@export var viscosity:float=0.
 
 
 var rd:RenderingDevice
