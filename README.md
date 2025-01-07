@@ -1,6 +1,7 @@
 # Simple Particle fluid simulation written in godot
 
-[Demo Video](./demo.mkv)
+https://github.com/user-attachments/assets/9e791337-2e29-43c5-b8cd-03b43c9144ae
+
 
 ## Workflow
 
