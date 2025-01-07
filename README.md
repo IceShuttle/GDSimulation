@@ -1,5 +1,7 @@
 # Simple Particle fluid simulation written in godot
 
+[Demo Video](./demo.mkv)
+
 ## Workflow
 
 1) Compilation of Compute shader and initial data and binding done by gdscript
